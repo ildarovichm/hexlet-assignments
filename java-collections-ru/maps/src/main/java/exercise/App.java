@@ -1,9 +1,7 @@
 package exercise;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 // BEGIN
 public class App {
@@ -18,10 +16,14 @@ public class App {
 
         for ( String word : pairs ) {
             Integer oldCount = occurrences.get(word);
-            if ( oldCount == null ) {
+            if (oldCount == null) {
                 oldCount = 0;
             }
-            occurrences.put(word, oldCount + 1);
+            if (str == "") {
+                return occurrences;
+            } else {
+                occurrences.put(word, oldCount + 1);
+            }
         }
         return occurrences;
     }
@@ -42,5 +44,4 @@ public class App {
         return result;
     }
 }
-
 //END
