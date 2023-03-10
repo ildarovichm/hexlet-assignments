@@ -28,10 +28,14 @@ class ValidationTest {
     }
 
     // BEGIN
+    @Test
     void testValidate2() throws IllegalAccessException {
         Address address = new Address("USA", "Texas", null, "7", "2");
         Map<String, List<String>> notValidFields = Validator.advancedValidate(address);
+        Map<String, List<String>> expected1 = Map.of("country", List.of("length less than 4"), "street", List.of("can not be null"));
+        assertThat(notValidFields).isEqualTo(expected1);
         System.out.println(notValidFields);
+        System.out.println(expected1);
     }
     // END
 }

@@ -4,7 +4,7 @@ class Address {
     // BEGIN
     @NotNull
     // END
-    @MinLength(minLength = 4, description = "")
+    @MinLength(minLength = 4)
     private String country;
 
     // BEGIN
