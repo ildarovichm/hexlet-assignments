@@ -8,8 +8,9 @@ import java.util.Map;
 
 // BEGIN
 public class Validator {
-    static final List<String> availableMethods = new ArrayList<>();
+
     public static List<String> validate(Address address) throws IllegalAccessException {
+        final List<String> availableMethods = new ArrayList<>();
         String name;
         var fields = address.getClass().getDeclaredFields();
         for (Field field : fields) {
@@ -22,10 +23,12 @@ public class Validator {
                 }
             }
         }
+        System.out.println();
         return availableMethods;
     }
 
     public static Map<String, List<String>> advancedValidate(Address address) throws IllegalAccessException {
+        final List<String> availableMethods = new ArrayList<>();
         final Map<String, List<String>> fieldListMap = new HashMap<>();
         String fieldName;
         final List<String> errorLength = List.of("length less than 4");
@@ -34,7 +37,6 @@ public class Validator {
         for (Field field : fields) {
             field.setAccessible(true);
             if (field.isAnnotationPresent(NotNull.class)) {
-                field.setAccessible(true);
                 fieldName = (String) field.get(address);
                 String fieldToString = String.valueOf(field);
                 if (fieldName == null) {
@@ -47,7 +49,6 @@ public class Validator {
             }
             if (field.isAnnotationPresent(MinLength.class)) {
                 field.setAccessible(true);
-                MinLength minLength = field.getAnnotation(MinLength.class);
                 fieldName = (String) field.get(address);
                 String fieldToString = String.valueOf(field);
                 if (fieldName != null && fieldName.length() < 4) {
